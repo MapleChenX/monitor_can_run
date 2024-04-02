@@ -126,6 +126,7 @@ public class MonitorController {
         }
     }
 
+    // 保存目标的(地址)、端口、主机用户名和密码到数据库
     @PostMapping("/ssh-save")
     public RestBean<Void> saveSshConnection(@RequestBody @Valid SshConnectionVO vo,
                                             @RequestAttribute(Const.ATTR_USER_ID) int userId,
@@ -138,6 +139,7 @@ public class MonitorController {
         }
     }
 
+    // 返回目标主机的地址、端口、用户名和密码
     @GetMapping("/ssh")
     public RestBean<SshSettingsVO> sshSettings(int clientId,
                                                @RequestAttribute(Const.ATTR_USER_ID) int userId,

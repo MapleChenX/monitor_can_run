@@ -9,7 +9,6 @@ const props = defineProps({
   id: Number
 })
 const emits = defineEmits(['dispose'])
-
 const terminalRef = ref()
 
 const socket = new WebSocket(`ws://127.0.0.1:8080/terminal/${props.id}`)
@@ -21,7 +20,8 @@ socket.onclose = evt => {
   }
   emits('dispose')
 }
-const attachAddon = new AttachAddon(socket);
+
+// 终端本端
 const term = new Terminal({
   lineHeight: 1.2,
   rows: 20,
@@ -37,16 +37,23 @@ const term = new Terminal({
   scrollback: 100,
   tabStopWidth: 4,
 });
+
+// 插件挂到元素上
+const attachAddon = new AttachAddon(socket);
+// 终端通过插件在元素上挂载显示
 term.loadAddon(attachAddon);
 
 onMounted(() => {
-  term.open(terminalRef.value)
-  term.focus()
+    // 页面一打开终端就打开
+    term.open(terminalRef.value)
+    term.focus()
 })
 
 onBeforeUnmount(() => {
-  socket.close()
-  term.dispose()
+    // 当页面一关闭，连接就关闭
+    socket.close()
+    // 终端也关闭
+    term.dispose()
 })
 </script>
 

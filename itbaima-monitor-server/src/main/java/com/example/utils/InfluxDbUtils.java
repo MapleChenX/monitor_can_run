@@ -29,7 +29,7 @@ public class InfluxDbUtils {
     String password;
 
     private final String BUCKET = "monitor";
-    private final String ORG = "itbaima";
+    private final String ORG = "MyGroupYep";
 
     private InfluxDBClient client;
 

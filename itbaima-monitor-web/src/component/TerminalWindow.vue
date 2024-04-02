@@ -48,6 +48,7 @@ watch(() => props.id, id => {
     get(`/api/monitor/ssh?clientId=${id}`, data => Object.assign(connection, data))
   }
 }, { immediate: true })
+
 </script>
 
 <template>
